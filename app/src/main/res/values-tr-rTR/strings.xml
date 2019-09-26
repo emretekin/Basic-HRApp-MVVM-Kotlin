@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IK Uygulaması</string>
+
+    <string name="position" translatable="false">position</string>
+    <string name="personel_list">Personel Listesi</string>
+    <string name="employee_detail">Personel Detay</string>
+</resources>

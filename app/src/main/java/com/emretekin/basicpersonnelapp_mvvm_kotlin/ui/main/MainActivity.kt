@@ -42,10 +42,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
         setToolbar()
         setEmployeeItems()
         createObservers()
-
-        //TODO connection check splash
-        // page delay, paging
-        // Landscape support with event
     }
 
     fun createObservers() {
@@ -60,7 +56,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
     }
 
     fun setEmployeeItems() {
+
+        val adapter = EmployeesAdapter {
+            val nextScreenIntent = Intent(this.applicationContext, EmployeeDetailActivity::class.java)
+            nextScreenIntent.putExtra(Constants.BundleArguments.EMPLOYEE_ID, it.id)
+            this.startActivity(nextScreenIntent)
+            this.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_out_left)
+        }
+
         val layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        binding.employeesRecyclerview.layoutManager = layoutManager
         binding.employeesRecyclerview.addOnScrollListener(object : PaginationScrollListener(layoutManager) {
             override fun isLastPage(): Boolean {
                 return isLastPage
@@ -77,12 +82,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
             }
         })
 
-        binding.employeesRecyclerview.adapter = EmployeesAdapter {
-            val nextScreenIntent = Intent(this.applicationContext, EmployeeDetailActivity::class.java)
-            nextScreenIntent.putExtra(Constants.BundleArguments.EMPLOYEE_ID, it.id)
-            this.startActivity(nextScreenIntent)
-            this.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_out_left)
-        }
+        binding.employeesRecyclerview.adapter = adapter
     }
 
     fun getMoreItems(mNextPage: Int) {
