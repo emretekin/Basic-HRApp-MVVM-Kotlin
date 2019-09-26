@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.emretekin.basicpersonnelapp_mvvm_kotlin"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //supportLib
+    implementation "androidx.legacy:legacy-support-v4:$support_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$support_version"
+    implementation "androidx.recyclerview:recyclerview:$support_version"
+    implementation "androidx.cardview:cardview:$support_version"
+    implementation 'androidx.core:core-ktx:1.1.0-alpha04'
+
+    // data binding
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    kapt "com.android.databinding:compiler:3.1.4"
+    annotationProcessor "com.android.databinding:compiler:3.1.4"
+
+    //stetho
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-urlconnection:$stethoVersion"
+
+    //anko
+    implementation rootProject.ext.anko
+    implementation rootProject.ext.ankoCoroutines
+
+    //di
+    implementation rootProject.ext.dagger
+    kapt rootProject.ext.daggerApt
+
+    //rx
+    implementation rootProject.ext.rxJava
+    implementation rootProject.ext.rxAndroid
+    implementation rootProject.ext.rxKotlin
+
+    //room
+    implementation rootProject.ext.roomRuntime
+    kapt rootProject.ext.roomCompiler
+
+    //net
+    implementation rootProject.ext.retrofit
+    implementation rootProject.ext.okHttp
+    implementation rootProject.ext.gson
+    implementation rootProject.ext.rxJavaAdapter
+    implementation rootProject.ext.gsonConverter
+
+    //auto dispose
+    implementation rootProject.ext.autoDispose
+    implementation rootProject.ext.autoDisposeAndroidExt
+    implementation rootProject.ext.autoDisposeLifecycle
+    implementation rootProject.ext.autoDisposeArchComponents
+
+    //lifecycle
+    implementation rootProject.ext.lifecycleExt
+    annotationProcessor rootProject.ext.lifecycleAnnotation
+    implementation rootProject.ext.lifecycleViewModelKtx
+
+    //navigation
+    implementation rootProject.ext.navigationFragment
+    implementation rootProject.ext.navigationUI
+
+    //others
+    implementation rootProject.ext.timber
+    implementation rootProject.ext.circularImageView
+    implementation rootProject.ext.picasso
+}
